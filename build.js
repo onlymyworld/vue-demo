@@ -50,23 +50,106 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _store = __webpack_require__(3);
-
-	var _store2 = _interopRequireDefault(_store);
-
-	var _App = __webpack_require__(5);
+	var _App = __webpack_require__(3);
 
 	var _App2 = _interopRequireDefault(_App);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	/**
+		* Created by YueFang on 2017/3/29.
+		*/
+
+	/*
+	import Vue from "vue"
+	import store from './vuex/store'
+	import App from './components/App.vue'
+
+	new Vue({
+		store,
+		el:'body',
+		components:{ App }
+	})*/
+
 	new _vue2.default({
-		store: _store2.default,
 		el: 'body',
 		components: { App: _App2.default }
-	}); /**
-	    	* Created by YueFang on 2017/3/29.
-	    	*/
+	});
+
+	/*
+
+	new Vue({
+		el:'#message',
+		data:{
+			message:"hello world!"
+		}
+	});
+
+	var vm  = new Vue({
+		el:"#computed",
+		data:{
+			a:4
+		},
+		computed:{
+			aDouble: function (){
+				return this.a * 2;
+			},
+			aPlus:{
+				get: function (){
+					return this.a +1;
+				},
+				set: function (v) {
+					this.a = v-1;
+				}
+			}
+		}
+	});
+
+	/!*var Comp = Vue.extend({
+		props:['msg'],
+		template:"<div>{{msg}}</div>"
+	})
+	var vmm = new Comp({
+		propsData:{
+			msg:"hello world"
+		}
+	})*!/
+	Vue.component("hello",{
+		props:['msg'],
+		template:"<span>{{ msg }}</span>"
+	})
+	Vue.component('child', {
+		// 声明 props
+		props: ['message'],
+		// 就像 data 一样，prop 可以用在模板内
+		// 同样也可以在 vm 实例中像 “this.message” 这样使用
+		template: '<span>{{ message }}</span>'
+	})
+
+	Vue.component('myMessage', {
+		// camelCase in JavaScript
+		props: ['myMessage'],
+		template: '<span>{{ myMessage }}</span>'
+	})
+
+
+	var child = {
+		template:"<div>a coustom Components.vue</div>"
+	}
+	new Vue({
+		component:{
+			'my-component':child
+		}
+	})
+	*/
+	/*
+
+	Vue.component('my-component',{
+		template:"<div>a coustom Components.vue</div>"
+	});
+	new Vue({
+		el:"#example"
+	})*/
 
 /***/ },
 /* 1 */
@@ -10183,7 +10266,7 @@
 	    var name = extendOptions.name || Super.options.name;
 	    if (process.env.NODE_ENV !== 'production') {
 	      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
-	        warn('Invalid component name: "' + name + '". Component names ' + 'can only contain alphanumeric characaters and the hyphen.');
+	        warn('Invalid component name: "' + name + '". components.vue names ' + 'can only contain alphanumeric characaters and the hyphen.');
 	        name = null;
 	      }
 	    }
@@ -10502,707 +10585,12 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _vue = __webpack_require__(1);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	var _vuex = __webpack_require__(4);
-
-	var _vuex2 = _interopRequireDefault(_vuex);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	_vue2.default.use(_vuex2.default);
-
-	var state = {
-	  notes: [],
-	  activeNote: {}
-	};
-
-	var mutations = {
-	  ADD_NOTE: function ADD_NOTE(state) {
-	    var newNote = {
-	      text: 'New note',
-	      favorite: false
-	    };
-	    state.notes.push(newNote);
-	    state.activeNote = newNote;
-	  },
-	  EDIT_NOTE: function EDIT_NOTE(state, text) {
-	    state.activeNote.text = text;
-	  },
-	  DELETE_NOTE: function DELETE_NOTE(state) {
-	    state.notes.$remove(state.activeNote);
-	    state.activeNote = state.notes[0];
-	  },
-	  TOGGLE_FAVORITE: function TOGGLE_FAVORITE(state) {
-	    state.activeNote.favorite = !state.activeNote.favorite;
-	  },
-	  SET_ACTIVE_NOTE: function SET_ACTIVE_NOTE(state, note) {
-	    state.activeNote = note;
-	  }
-	};
-
-	exports.default = new _vuex2.default.Store({
-	  state: state,
-	  mutations: mutations
-	});
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*!
-	 * Vuex v0.6.3
-	 * (c) 2016 Evan You
-	 * Released under the MIT License.
-	 */
-	(function (global, factory) {
-	   true ? module.exports = factory() :
-	  typeof define === 'function' && define.amd ? define(factory) :
-	  (global.Vuex = factory());
-	}(this, function () { 'use strict';
-
-	  var babelHelpers = {};
-	  babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-	    return typeof obj;
-	  } : function (obj) {
-	    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-	  };
-
-	  babelHelpers.classCallCheck = function (instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	      throw new TypeError("Cannot call a class as a function");
-	    }
-	  };
-
-	  babelHelpers.createClass = function () {
-	    function defineProperties(target, props) {
-	      for (var i = 0; i < props.length; i++) {
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	      }
-	    }
-
-	    return function (Constructor, protoProps, staticProps) {
-	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	      if (staticProps) defineProperties(Constructor, staticProps);
-	      return Constructor;
-	    };
-	  }();
-
-	  babelHelpers.toConsumableArray = function (arr) {
-	    if (Array.isArray(arr)) {
-	      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-	      return arr2;
-	    } else {
-	      return Array.from(arr);
-	    }
-	  };
-
-	  babelHelpers;
-
-	  /**
-	   * Merge an array of objects into one.
-	   *
-	   * @param {Array<Object>} arr
-	   * @return {Object}
-	   */
-
-	  function mergeObjects(arr) {
-	    return arr.reduce(function (prev, obj) {
-	      Object.keys(obj).forEach(function (key) {
-	        var existing = prev[key];
-	        if (existing) {
-	          // allow multiple mutation objects to contain duplicate
-	          // handlers for the same mutation type
-	          if (Array.isArray(existing)) {
-	            existing.push(obj[key]);
-	          } else {
-	            prev[key] = [prev[key], obj[key]];
-	          }
-	        } else {
-	          prev[key] = obj[key];
-	        }
-	      });
-	      return prev;
-	    }, {});
-	  }
-
-	  /**
-	   * Deep clone an object. Faster than JSON.parse(JSON.stringify()).
-	   *
-	   * @param {*} obj
-	   * @return {*}
-	   */
-
-	  function deepClone(obj) {
-	    if (Array.isArray(obj)) {
-	      return obj.map(deepClone);
-	    } else if (obj && (typeof obj === 'undefined' ? 'undefined' : babelHelpers.typeof(obj)) === 'object') {
-	      var cloned = {};
-	      var keys = Object.keys(obj);
-	      for (var i = 0, l = keys.length; i < l; i++) {
-	        var key = keys[i];
-	        cloned[key] = deepClone(obj[key]);
-	      }
-	      return cloned;
-	    } else {
-	      return obj;
-	    }
-	  }
-
-	  /**
-	   * Hacks to get access to Vue internals.
-	   * Maybe we should expose these...
-	   */
-
-	  var Watcher = void 0;
-	  function getWatcher(vm) {
-	    if (!Watcher) {
-	      var unwatch = vm.$watch('__vuex__', function (a) {
-	        return a;
-	      });
-	      Watcher = vm._watchers[0].constructor;
-	      unwatch();
-	    }
-	    return Watcher;
-	  }
-
-	  var Dep = void 0;
-	  function getDep(vm) {
-	    if (!Dep) {
-	      Dep = vm._data.__ob__.dep.constructor;
-	    }
-	    return Dep;
-	  }
-
-	  var hook = typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-
-	  var devtoolMiddleware = {
-	    onInit: function onInit(state, store) {
-	      if (!hook) return;
-	      hook.emit('vuex:init', store);
-	      hook.on('vuex:travel-to-state', function (targetState) {
-	        var currentState = store._vm._data;
-	        store._dispatching = true;
-	        Object.keys(targetState).forEach(function (key) {
-	          currentState[key] = targetState[key];
-	        });
-	        store._dispatching = false;
-	      });
-	    },
-	    onMutation: function onMutation(mutation, state) {
-	      if (!hook) return;
-	      hook.emit('vuex:mutation', mutation, state);
-	    }
-	  };
-
-	  function override (Vue) {
-	    // override init and inject vuex init procedure
-	    var _init = Vue.prototype._init;
-	    Vue.prototype._init = function () {
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      options.init = options.init ? [vuexInit].concat(options.init) : vuexInit;
-	      _init.call(this, options);
-	    };
-
-	    /**
-	     * Vuex init hook, injected into each instances init hooks list.
-	     */
-
-	    function vuexInit() {
-	      var options = this.$options;
-	      var store = options.store;
-	      var vuex = options.vuex;
-	      // store injection
-
-	      if (store) {
-	        this.$store = store;
-	      } else if (options.parent && options.parent.$store) {
-	        this.$store = options.parent.$store;
-	      }
-	      // vuex option handling
-	      if (vuex) {
-	        if (!this.$store) {
-	          console.warn('[vuex] store not injected. make sure to ' + 'provide the store option in your root component.');
-	        }
-	        var state = vuex.state;
-	        var getters = vuex.getters;
-	        var actions = vuex.actions;
-	        // handle deprecated state option
-
-	        if (state && !getters) {
-	          console.warn('[vuex] vuex.state option will been deprecated in 1.0. ' + 'Use vuex.getters instead.');
-	          getters = state;
-	        }
-	        // getters
-	        if (getters) {
-	          options.computed = options.computed || {};
-	          for (var key in getters) {
-	            defineVuexGetter(this, key, getters[key]);
-	          }
-	        }
-	        // actions
-	        if (actions) {
-	          options.methods = options.methods || {};
-	          for (var _key in actions) {
-	            options.methods[_key] = makeBoundAction(this.$store, actions[_key], _key);
-	          }
-	        }
-	      }
-	    }
-
-	    /**
-	     * Setter for all getter properties.
-	     */
-
-	    function setter() {
-	      throw new Error('vuex getter properties are read-only.');
-	    }
-
-	    /**
-	     * Define a Vuex getter on an instance.
-	     *
-	     * @param {Vue} vm
-	     * @param {String} key
-	     * @param {Function} getter
-	     */
-
-	    function defineVuexGetter(vm, key, getter) {
-	      if (typeof getter !== 'function') {
-	        console.warn('[vuex] Getter bound to key \'vuex.getters.' + key + '\' is not a function.');
-	      } else {
-	        Object.defineProperty(vm, key, {
-	          enumerable: true,
-	          configurable: true,
-	          get: makeComputedGetter(vm.$store, getter),
-	          set: setter
-	        });
-	      }
-	    }
-
-	    /**
-	     * Make a computed getter, using the same caching mechanism of computed
-	     * properties. In addition, it is cached on the raw getter function using
-	     * the store's unique cache id. This makes the same getter shared
-	     * across all components use the same underlying watcher, and makes
-	     * the getter evaluated only once during every flush.
-	     *
-	     * @param {Store} store
-	     * @param {Function} getter
-	     */
-
-	    function makeComputedGetter(store, getter) {
-	      var id = store._getterCacheId;
-
-	      // cached
-	      if (getter[id]) {
-	        return getter[id];
-	      }
-	      var vm = store._vm;
-	      var Watcher = getWatcher(vm);
-	      var Dep = getDep(vm);
-	      var watcher = new Watcher(vm, function (state) {
-	        return getter(state);
-	      }, null, { lazy: true });
-	      var computedGetter = function computedGetter() {
-	        if (watcher.dirty) {
-	          watcher.evaluate();
-	        }
-	        if (Dep.target) {
-	          watcher.depend();
-	        }
-	        return watcher.value;
-	      };
-	      getter[id] = computedGetter;
-	      return computedGetter;
-	    }
-
-	    /**
-	     * Make a bound-to-store version of a raw action function.
-	     *
-	     * @param {Store} store
-	     * @param {Function} action
-	     * @param {String} key
-	     */
-
-	    function makeBoundAction(store, action, key) {
-	      if (typeof action !== 'function') {
-	        console.warn('[vuex] Action bound to key \'vuex.actions.' + key + '\' is not a function.');
-	      }
-	      return function vuexBoundAction() {
-	        for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
-	          args[_key2] = arguments[_key2];
-	        }
-
-	        return action.call.apply(action, [this, store].concat(args));
-	      };
-	    }
-
-	    // option merging
-	    var merge = Vue.config.optionMergeStrategies.computed;
-	    Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
-	      if (!toVal) return fromVal;
-	      if (!fromVal) return toVal;
-	      return {
-	        getters: merge(toVal.getters, fromVal.getters),
-	        state: merge(toVal.state, fromVal.state),
-	        actions: merge(toVal.actions, fromVal.actions)
-	      };
-	    };
-	  }
-
-	  var Vue = void 0;
-	  var uid = 0;
-
-	  var Store = function () {
-
-	    /**
-	     * @param {Object} options
-	     *        - {Object} state
-	     *        - {Object} actions
-	     *        - {Object} mutations
-	     *        - {Array} middlewares
-	     *        - {Boolean} strict
-	     */
-
-	    function Store() {
-	      var _this = this;
-
-	      var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      var _ref$state = _ref.state;
-	      var state = _ref$state === undefined ? {} : _ref$state;
-	      var _ref$mutations = _ref.mutations;
-	      var mutations = _ref$mutations === undefined ? {} : _ref$mutations;
-	      var _ref$modules = _ref.modules;
-	      var modules = _ref$modules === undefined ? {} : _ref$modules;
-	      var _ref$middlewares = _ref.middlewares;
-	      var middlewares = _ref$middlewares === undefined ? [] : _ref$middlewares;
-	      var _ref$strict = _ref.strict;
-	      var strict = _ref$strict === undefined ? false : _ref$strict;
-	      babelHelpers.classCallCheck(this, Store);
-
-	      this._getterCacheId = 'vuex_store_' + uid++;
-	      this._dispatching = false;
-	      this._rootMutations = this._mutations = mutations;
-	      this._modules = modules;
-	      // bind dispatch to self
-	      var dispatch = this.dispatch;
-	      this.dispatch = function () {
-	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	          args[_key] = arguments[_key];
-	        }
-
-	        dispatch.apply(_this, args);
-	      };
-	      // use a Vue instance to store the state tree
-	      // suppress warnings just in case the user has added
-	      // some funky global mixins
-	      if (!Vue) {
-	        throw new Error('[vuex] must call Vue.use(Vuex) before creating a store instance.');
-	      }
-	      var silent = Vue.config.silent;
-	      Vue.config.silent = true;
-	      this._vm = new Vue({
-	        data: state
-	      });
-	      Vue.config.silent = silent;
-	      this._setupModuleState(state, modules);
-	      this._setupModuleMutations(modules);
-	      this._setupMiddlewares(middlewares, state);
-	      // add extra warnings in strict mode
-	      if (strict) {
-	        this._setupMutationCheck();
-	      }
-	    }
-
-	    /**
-	     * Getter for the entire state tree.
-	     * Read only.
-	     *
-	     * @return {Object}
-	     */
-
-	    babelHelpers.createClass(Store, [{
-	      key: 'dispatch',
-
-
-	      /**
-	       * Dispatch an action.
-	       *
-	       * @param {String} type
-	       */
-
-	      value: function dispatch(type) {
-	        for (var _len2 = arguments.length, payload = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-	          payload[_key2 - 1] = arguments[_key2];
-	        }
-
-	        var silent = false;
-	        // compatibility for object actions, e.g. FSA
-	        if ((typeof type === 'undefined' ? 'undefined' : babelHelpers.typeof(type)) === 'object' && type.type && arguments.length === 1) {
-	          payload = [type.payload];
-	          if (type.silent) silent = true;
-	          type = type.type;
-	        }
-	        var mutation = this._mutations[type];
-	        var state = this.state;
-	        if (mutation) {
-	          this._dispatching = true;
-	          // apply the mutation
-	          if (Array.isArray(mutation)) {
-	            mutation.forEach(function (m) {
-	              return m.apply(undefined, [state].concat(babelHelpers.toConsumableArray(payload)));
-	            });
-	          } else {
-	            mutation.apply(undefined, [state].concat(babelHelpers.toConsumableArray(payload)));
-	          }
-	          this._dispatching = false;
-	          if (!silent) this._applyMiddlewares(type, payload);
-	        } else {
-	          console.warn('[vuex] Unknown mutation: ' + type);
-	        }
-	      }
-
-	      /**
-	       * Watch state changes on the store.
-	       * Same API as Vue's $watch, except when watching a function,
-	       * the function gets the state as the first argument.
-	       *
-	       * @param {String|Function} expOrFn
-	       * @param {Function} cb
-	       * @param {Object} [options]
-	       */
-
-	    }, {
-	      key: 'watch',
-	      value: function watch(expOrFn, cb, options) {
-	        var _this2 = this;
-
-	        return this._vm.$watch(function () {
-	          return typeof expOrFn === 'function' ? expOrFn(_this2.state) : _this2._vm.$get(expOrFn);
-	        }, cb, options);
-	      }
-
-	      /**
-	       * Hot update mutations & modules.
-	       *
-	       * @param {Object} options
-	       *        - {Object} [mutations]
-	       *        - {Object} [modules]
-	       */
-
-	    }, {
-	      key: 'hotUpdate',
-	      value: function hotUpdate() {
-	        var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	        var mutations = _ref2.mutations;
-	        var modules = _ref2.modules;
-
-	        this._rootMutations = this._mutations = mutations || this._rootMutations;
-	        this._setupModuleMutations(modules || this._modules);
-	      }
-
-	      /**
-	       * Attach sub state tree of each module to the root tree.
-	       *
-	       * @param {Object} state
-	       * @param {Object} modules
-	       */
-
-	    }, {
-	      key: '_setupModuleState',
-	      value: function _setupModuleState(state, modules) {
-	        Object.keys(modules).forEach(function (key) {
-	          Vue.set(state, key, modules[key].state || {});
-	        });
-	      }
-
-	      /**
-	       * Bind mutations for each module to its sub tree and
-	       * merge them all into one final mutations map.
-	       *
-	       * @param {Object} updatedModules
-	       */
-
-	    }, {
-	      key: '_setupModuleMutations',
-	      value: function _setupModuleMutations(updatedModules) {
-	        var modules = this._modules;
-	        var allMutations = [this._rootMutations];
-	        Object.keys(updatedModules).forEach(function (key) {
-	          modules[key] = updatedModules[key];
-	        });
-	        Object.keys(modules).forEach(function (key) {
-	          var module = modules[key];
-	          if (!module || !module.mutations) return;
-	          // bind mutations to sub state tree
-	          var mutations = {};
-	          Object.keys(module.mutations).forEach(function (name) {
-	            var original = module.mutations[name];
-	            mutations[name] = function (state) {
-	              for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-	                args[_key3 - 1] = arguments[_key3];
-	              }
-
-	              original.apply(undefined, [state[key]].concat(args));
-	            };
-	          });
-	          allMutations.push(mutations);
-	        });
-	        this._mutations = mergeObjects(allMutations);
-	      }
-
-	      /**
-	       * Setup mutation check: if the vuex instance's state is mutated
-	       * outside of a mutation handler, we throw en error. This effectively
-	       * enforces all mutations to the state to be trackable and hot-reloadble.
-	       * However, this comes at a run time cost since we are doing a deep
-	       * watch on the entire state tree, so it is only enalbed with the
-	       * strict option is set to true.
-	       */
-
-	    }, {
-	      key: '_setupMutationCheck',
-	      value: function _setupMutationCheck() {
-	        var _this3 = this;
-
-	        var Watcher = getWatcher(this._vm);
-	        /* eslint-disable no-new */
-	        new Watcher(this._vm, '$data', function () {
-	          if (!_this3._dispatching) {
-	            throw new Error('[vuex] Do not mutate vuex store state outside mutation handlers.');
-	          }
-	        }, { deep: true, sync: true });
-	        /* eslint-enable no-new */
-	      }
-
-	      /**
-	       * Setup the middlewares. The devtools middleware is always
-	       * included, since it does nothing if no devtool is detected.
-	       *
-	       * A middleware can demand the state it receives to be
-	       * "snapshots", i.e. deep clones of the actual state tree.
-	       *
-	       * @param {Array} middlewares
-	       * @param {Object} state
-	       */
-
-	    }, {
-	      key: '_setupMiddlewares',
-	      value: function _setupMiddlewares(middlewares, state) {
-	        var _this4 = this;
-
-	        this._middlewares = [devtoolMiddleware].concat(middlewares);
-	        this._needSnapshots = middlewares.some(function (m) {
-	          return m.snapshot;
-	        });
-	        if (this._needSnapshots) {
-	          console.log('[vuex] One or more of your middlewares are taking state snapshots ' + 'for each mutation. Make sure to use them only during development.');
-	        }
-	        var initialSnapshot = this._prevSnapshot = this._needSnapshots ? deepClone(state) : null;
-	        // call init hooks
-	        this._middlewares.forEach(function (m) {
-	          if (m.onInit) {
-	            m.onInit(m.snapshot ? initialSnapshot : state, _this4);
-	          }
-	        });
-	      }
-
-	      /**
-	       * Apply the middlewares on a given mutation.
-	       *
-	       * @param {String} type
-	       * @param {Array} payload
-	       */
-
-	    }, {
-	      key: '_applyMiddlewares',
-	      value: function _applyMiddlewares(type, payload) {
-	        var _this5 = this;
-
-	        var state = this.state;
-	        var prevSnapshot = this._prevSnapshot;
-	        var snapshot = void 0,
-	            clonedPayload = void 0;
-	        if (this._needSnapshots) {
-	          snapshot = this._prevSnapshot = deepClone(state);
-	          clonedPayload = deepClone(payload);
-	        }
-	        this._middlewares.forEach(function (m) {
-	          if (m.onMutation) {
-	            if (m.snapshot) {
-	              m.onMutation({ type: type, payload: clonedPayload }, snapshot, prevSnapshot, _this5);
-	            } else {
-	              m.onMutation({ type: type, payload: payload }, state, _this5);
-	            }
-	          }
-	        });
-	      }
-	    }, {
-	      key: 'state',
-	      get: function get() {
-	        return this._vm._data;
-	      },
-	      set: function set(v) {
-	        throw new Error('[vuex] Vuex root state is read only.');
-	      }
-	    }]);
-	    return Store;
-	  }();
-
-	  function install(_Vue) {
-	    if (Vue) {
-	      console.warn('[vuex] already installed. Vue.use(Vuex) should be called only once.');
-	      return;
-	    }
-	    Vue = _Vue;
-	    override(Vue);
-	  }
-
-	  // auto install in dist mode
-	  if (typeof window !== 'undefined' && window.Vue) {
-	    install(window.Vue);
-	  }
-
-	  function createLogger() {
-	    console.warn('[vuex] Vuex.createLogger has been deprecated.' + 'Use `import createLogger from \'vuex/logger\' instead.');
-	  }
-
-	  var index = {
-	    Store: Store,
-	    install: install,
-	    createLogger: createLogger
-	  };
-
-	  return index;
-
-	}));
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(6)
+	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(17)
+	__vue_template__ = __webpack_require__(8)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -11227,7 +10615,7 @@
 	})()}
 
 /***/ },
-/* 6 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11236,28 +10624,20 @@
 	  value: true
 	});
 
-	var _Toolbar = __webpack_require__(7);
+	var _Components = __webpack_require__(5);
 
-	var _Toolbar2 = _interopRequireDefault(_Toolbar);
-
-	var _NotesList = __webpack_require__(11);
-
-	var _NotesList2 = _interopRequireDefault(_NotesList);
-
-	var _Editor = __webpack_require__(14);
-
-	var _Editor2 = _interopRequireDefault(_Editor);
+	var _Components2 = _interopRequireDefault(_Components);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	  components: {
-	    Toolbar: _Toolbar2.default,
-	    NotesList: _NotesList2.default,
-	    Editor: _Editor2.default
+	    Components: _Components2.default
 	  }
 	};
 	// </script>
+	// <!--
+	//
 	// <template>
 	//   <div id="app">
 	//     <toolbar></toolbar>
@@ -11267,332 +10647,108 @@
 	// </template>
 	//
 	// <script>
+	//   import Toolbar from "./Toolbar.vue"
+	//   import NotesList from "./NotesList.vue"
+	//   import Editor from "./Editor.vue"
+	//   export default{
+	//     components:{
+	//       Toolbar,
+	//       NotesList,
+	//       Editor
+	//     }
+	//   }
+	// </script>
+	// -->
+	//
+	//
+	// <template>
+	//   <div id="app">
+	//     <components></components>
+	//   </div>
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(6)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Components.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(7)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-da4d0f86/Components.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//   <div id="example">
+	//      <my-component></my-component>
+	//      <hello></hello>
+	//   </div>
+	// </template>
+	//
+	// <script>
+
+	/**
+	局部组件的使用方法
+	 */
+	var child = {
+	    template: "<div>hello world!</div>"
+	};
+	var hello = {
+	    template: "<div>hello world 1</div>"
+	};
+	exports.default = {
+	    components: {
+	        "my-component": child,
+	        "hello": hello
+	    }
+	};
+
+	// </script>
 
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(8)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] components\\Toolbar.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(10)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-e09e6538/Toolbar.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
+	module.exports = "\n<div id=\"example\">\n   <my-component></my-component>\n   <hello></hello>\n</div>\n";
 
 /***/ },
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _actions = __webpack_require__(9);
-
-	exports.default = {
-	  vuex: {
-	    getters: {
-	      activeNote: function activeNote(state) {
-	        return state.activeNote;
-	      }
-	    },
-	    actions: {
-	      addNote: _actions.addNote,
-	      deleteNote: _actions.deleteNote,
-	      toggleFavorite: _actions.toggleFavorite
-	    }
-	  }
-	};
-	// </script>
-	// <template>
-	//   <div id="toolbar">
-	//     <i @click="addNote" class="glyphicon glyphicon-plus"></i>
-	//     <i @click="toggleFavorite"
-	//       class="glyphicon glyphicon-star"
-	//       :class="{starred: activeNote.favorite}"></i>
-	//     <i @click="deleteNote" class="glyphicon glyphicon-remove"></i>
-	//   </div>
-	// </template>
-	//
-	// <script>
-
-/***/ },
-/* 9 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var addNote = exports.addNote = function addNote(_ref) {
-	  var dispatch = _ref.dispatch;
-
-	  dispatch('ADD_NOTE');
-	};
-
-	var editNote = exports.editNote = function editNote(_ref2, e) {
-	  var dispatch = _ref2.dispatch;
-
-	  dispatch('EDIT_NOTE', e.target.value);
-	};
-
-	var deleteNote = exports.deleteNote = function deleteNote(_ref3) {
-	  var dispatch = _ref3.dispatch;
-
-	  dispatch('DELETE_NOTE');
-	};
-
-	var updateActiveNote = exports.updateActiveNote = function updateActiveNote(_ref4, note) {
-	  var dispatch = _ref4.dispatch;
-
-	  dispatch('SET_ACTIVE_NOTE', note);
-	};
-
-	var toggleFavorite = exports.toggleFavorite = function toggleFavorite(_ref5) {
-	  var dispatch = _ref5.dispatch;
-
-	  dispatch('TOGGLE_FAVORITE');
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"toolbar\">\n  <i @click=\"addNote\" class=\"glyphicon glyphicon-plus\"></i>\n  <i @click=\"toggleFavorite\"\n    class=\"glyphicon glyphicon-star\"\n    :class=\"{starred: activeNote.favorite}\"></i>\n  <i @click=\"deleteNote\" class=\"glyphicon glyphicon-remove\"></i>\n</div>\n";
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(12)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] components\\NotesList.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(13)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-12d9cab0/NotesList.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _actions = __webpack_require__(9);
-
-	exports.default = {
-	  data: function data() {
-	    return {
-	      show: 'all'
-	    };
-	  },
-
-	  vuex: {
-	    getters: {
-	      notes: function notes(state) {
-	        return state.notes;
-	      },
-	      activeNote: function activeNote(state) {
-	        return state.activeNote;
-	      }
-	    },
-	    actions: {
-	      updateActiveNote: _actions.updateActiveNote
-	    }
-	  },
-	  computed: {
-	    filteredNotes: function filteredNotes() {
-	      if (this.show === 'all') {
-	        return this.notes;
-	      } else if (this.show === 'favorites') {
-	        return this.notes.filter(function (note) {
-	          return note.favorite;
-	        });
-	      }
-	    }
-	  }
-	};
-	// </script>
-	// <template>
-	//   <div id="notes-list">
-	//
-	//     <div id="list-header">
-	//       <h2>Notes | coligo</h2>
-	//       <div class="btn-group btn-group-justified" role="group">
-	//         <!-- All Notes button -->
-	//         <div class="btn-group" role="group">
-	//           <button type="button" class="btn btn-default"
-	//             @click="show = 'all'"
-	//             :class="{active: show === 'all'}">
-	//             All Notes
-	//           </button>
-	//         </div>
-	//         <!-- Favorites Button -->
-	//         <div class="btn-group" role="group">
-	//           <button type="button" class="btn btn-default"
-	//             @click="show = 'favorites'"
-	//             :class="{active: show === 'favorites'}">
-	//             Favorites
-	//           </button>
-	//         </div>
-	//       </div>
-	//     </div>
-	//     <!-- render notes in a list -->
-	//     <div class="container">
-	//       <div class="list-group">
-	//         <a v-for="note in filteredNotes"
-	//           class="list-group-item" href="#"
-	//           :class="{active: activeNote === note}"
-	//           @click="updateActiveNote(note)">
-	//           <h4 class="list-group-item-heading">
-	//             {{note.text.trim().substring(0, 30)}}
-	//           </h4>
-	//         </a>
-	//       </div>
-	//     </div>
-	//
-	//   </div>
-	// </template>
-	//
-	// <script>
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"notes-list\">\n\n  <div id=\"list-header\">\n    <h2>Notes | coligo</h2>\n    <div class=\"btn-group btn-group-justified\" role=\"group\">\n      <!-- All Notes button -->\n      <div class=\"btn-group\" role=\"group\">\n        <button type=\"button\" class=\"btn btn-default\"\n          @click=\"show = 'all'\"\n          :class=\"{active: show === 'all'}\">\n          All Notes\n        </button>\n      </div>\n      <!-- Favorites Button -->\n      <div class=\"btn-group\" role=\"group\">\n        <button type=\"button\" class=\"btn btn-default\"\n          @click=\"show = 'favorites'\"\n          :class=\"{active: show === 'favorites'}\">\n          Favorites\n        </button>\n      </div>\n    </div>\n  </div>\n  <!-- render notes in a list -->\n  <div class=\"container\">\n    <div class=\"list-group\">\n      <a v-for=\"note in filteredNotes\"\n        class=\"list-group-item\" href=\"#\"\n        :class=\"{active: activeNote === note}\"\n        @click=\"updateActiveNote(note)\">\n        <h4 class=\"list-group-item-heading\">\n          {{note.text.trim().substring(0, 30)}}\n        </h4>\n      </a>\n    </div>\n  </div>\n\n</div>\n";
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(15)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] components\\Editor.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(16)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-623f3294/Editor.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _actions = __webpack_require__(9);
-
-	exports.default = {
-	  vuex: {
-	    getters: {
-	      activeNoteText: function activeNoteText(state) {
-	        return state.activeNote.text;
-	      }
-	    },
-	    actions: {
-	      editNote: _actions.editNote
-	    }
-	  }
-	};
-	// </script>
-	// <template>
-	//   <div id="note-editor">
-	//     <textarea
-	//       :value="activeNoteText"
-	//       @input="editNote"
-	//       class="form-control">
-	//     </textarea>
-	//   </div>
-	// </template>
-	//
-	// <script>
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"note-editor\">\n  <textarea\n    :value=\"activeNoteText\"\n    @input=\"editNote\"\n    class=\"form-control\">\n  </textarea>\n</div>\n";
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"app\">\n  <toolbar></toolbar>\n  <notes-list></notes-list>\n  <editor></editor>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n</div>\n";
 
 /***/ }
 /******/ ]);

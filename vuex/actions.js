@@ -17,3 +17,7 @@ export const updateActiveNote = ({ dispatch }, note) => {
 export const toggleFavorite = ({ dispatch }) => {
   dispatch('TOGGLE_FAVORITE')
 }
+
+export const toggleTab = ({dispatch}) =>{
+  dispatch('TOGGLE_TAB')
+}
