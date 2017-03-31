@@ -10590,7 +10590,7 @@
 	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(8)
+	__vue_template__ = __webpack_require__(14)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10628,11 +10628,21 @@
 
 	var _Components2 = _interopRequireDefault(_Components);
 
+	var _Datamustfun = __webpack_require__(8);
+
+	var _Datamustfun2 = _interopRequireDefault(_Datamustfun);
+
+	var _Parentpropstochild = __webpack_require__(11);
+
+	var _Parentpropstochild2 = _interopRequireDefault(_Parentpropstochild);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	  components: {
-	    Components: _Components2.default
+	    Components: _Components2.default,
+	    Datamustfun: _Datamustfun2.default,
+	    Parentpropstochild: _Parentpropstochild2.default
 	  }
 	};
 	// </script>
@@ -10664,6 +10674,8 @@
 	// <template>
 	//   <div id="app">
 	//     <components></components>
+	//     <datamustfun></datamustfun>
+	//     <parentpropstochild></parentpropstochild>
 	//   </div>
 	// </template>
 	//
@@ -10746,9 +10758,204 @@
 
 /***/ },
 /* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(9)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Datamustfun.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(10)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-0bb1e0d5/Datamustfun.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n</div>\n";
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//     <div id="data_must_fun">
+	//         <my-counter></my-counter>
+	//         <my-counter></my-counter>
+	//         <my-counter></my-counter>
+	//         <newmycounter></newmycounter>
+	//         <newmycounter></newmycounter>
+	//         <newmycounter></newmycounter>
+	//     </div>
+	// </template>
+	//
+	// <script>
+
+
+	/**
+	 * data 必须是函数，
+	 *  Data must a function
+	 * */
+
+	var _data = { counter: 1, newcounter: 0 };
+
+	/**
+	 * 自定义一个局部组件*/
+	var mycounter = {
+	    template: "<button v-on:click='counter +=1'>{{counter}}</button>",
+	    data: function data() {
+	        return _data;
+	    }
+	};
+
+	/**
+	 * 由于这三个组件共享了同一个 data;因此增加一个 counter 会影响所有组件！这不对。
+	 我们可以通过为每个组件返回全新的 data 对象来解决这个问题*/
+	var mynewcounter = {
+	    template: "<button v-on:click='newcounter +=1'>{{ newcounter }}</button>",
+	    data: function data() {
+	        return {
+	            /**
+	             * 这样每个newcounter都有他自己内部的状态，不会互相干扰*/
+	            newcounter: 0
+	        };
+	    }
+	};
+
+	exports.default = {
+	    components: {
+	        "my-counter": mycounter,
+	        "newmycounter": mynewcounter
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"data_must_fun\">\n    <my-counter></my-counter>\n    <my-counter></my-counter>\n    <my-counter></my-counter>\n    <newmycounter></newmycounter>\n    <newmycounter></newmycounter>\n    <newmycounter></newmycounter>\n</div>\n";
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(12)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Parentpropstochild.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(13)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-d7582d3c/Parentpropstochild.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//   <div id="parentpropstochild">
+	//      <child message="this is parent props to child example!"></child>
+	//       <camelcased my-message="this is camelCased example!"></camelcased>
+	//       <dyanprops></dyanprops>
+	//   </div>
+	// </template>
+	//
+	// <script>
+
+	/**
+	 * 定义一个局部组件
+	 * */
+	/**
+	 * 子组件要想使用父组件的数据，需要使用props选项
+	 * 子组件要显式的用props选项声明它期待获得的数据*/
+	var child = {
+	    props: ['message'],
+	    template: "<span>{{message}}</span>"
+	};
+
+	/**
+	 * *HTML 特性是不区分大小写的。所以，
+	 * 当使用的不是字符串模版，camelCased (驼峰式) 命名的 prop 需要转换为相对应的 kebab-case (短横线隔开式) 命名
+	 * */
+
+	var camelcased = {
+	    props: ['myMessage'],
+	    template: "<div>{{myMessage}}</div>"
+	};
+
+	var dynaProp = {
+	    props: ['parentmsg'],
+	    template: "<div><input v-model='parentmsg'><br> <child :my-message='parentmsg'>{{parentmsg}}</child></div>"
+	};
+
+	exports.default = {
+	    components: {
+	        'child': child,
+	        'camelcased': camelcased,
+	        'dyanprops': dynaProp
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"parentpropstochild\">\n   <child message=\"this is parent props to child example!\"></child>\n    <camelcased my-message=\"this is camelCased example!\"></camelcased>\n    <dyanprops></dyanprops>\n</div>\n";
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n</div>\n";
 
 /***/ }
 /******/ ]);

@@ -26,15 +26,21 @@
 <template>
   <div id="app">
     <components></components>
+    <datamustfun></datamustfun>
+    <parentpropstochild></parentpropstochild>
   </div>
 </template>
 
 <script>
   import Components from './Components.vue'
+  import Datamustfun from './Datamustfun.vue'
+  import Parentpropstochild from './Parentpropstochild.vue'
 
   export default{
     components:{
-      Components
+      Components,
+      Datamustfun,
+      Parentpropstochild
     }
   }
 </script>
