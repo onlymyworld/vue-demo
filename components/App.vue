@@ -28,6 +28,7 @@
     <components></components>
     <datamustfun></datamustfun>
     <parentpropstochild></parentpropstochild>
+    <customercomponent></customercomponent>
   </div>
 </template>
 
@@ -35,12 +36,14 @@
   import Components from './Components.vue'
   import Datamustfun from './Datamustfun.vue'
   import Parentpropstochild from './Parentpropstochild.vue'
+  import Customercomponent from './Coustomecomponent.vue'
 
   export default{
     components:{
       Components,
       Datamustfun,
-      Parentpropstochild
+      Parentpropstochild,
+      Customercomponent
     }
   }
 </script>

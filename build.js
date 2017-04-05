@@ -10590,7 +10590,7 @@
 	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(14)
+	__vue_template__ = __webpack_require__(17)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10636,16 +10636,12 @@
 
 	var _Parentpropstochild2 = _interopRequireDefault(_Parentpropstochild);
 
+	var _Coustomecomponent = __webpack_require__(14);
+
+	var _Coustomecomponent2 = _interopRequireDefault(_Coustomecomponent);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
-	  components: {
-	    Components: _Components2.default,
-	    Datamustfun: _Datamustfun2.default,
-	    Parentpropstochild: _Parentpropstochild2.default
-	  }
-	};
-	// </script>
 	// <!--
 	//
 	// <template>
@@ -10676,10 +10672,20 @@
 	//     <components></components>
 	//     <datamustfun></datamustfun>
 	//     <parentpropstochild></parentpropstochild>
+	//     <customercomponent></customercomponent>
 	//   </div>
 	// </template>
 	//
 	// <script>
+	exports.default = {
+	  components: {
+	    Components: _Components2.default,
+	    Datamustfun: _Datamustfun2.default,
+	    Parentpropstochild: _Parentpropstochild2.default,
+	    Customercomponent: _Coustomecomponent2.default
+	  }
+	};
+	// </script>
 
 /***/ },
 /* 5 */
@@ -10897,7 +10903,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	// <template>
 	//   <div id="parentpropstochild">
@@ -10916,8 +10922,8 @@
 	 * 子组件要想使用父组件的数据，需要使用props选项
 	 * 子组件要显式的用props选项声明它期待获得的数据*/
 	var child = {
-	    props: ['message'],
-	    template: "<span>{{message}}</span>"
+	  props: ['message'],
+	  template: "<span>{{message}}</span>"
 	};
 
 	/**
@@ -10926,21 +10932,25 @@
 	 * */
 
 	var camelcased = {
-	    props: ['myMessage'],
-	    template: "<div>{{myMessage}}</div>"
+	  props: ['myMessage'],
+	  template: "<div>{{myMessage}}</div>"
 	};
 
+	/**
+	 * 在模板中，要动态地绑定父组件的数据到子模板的props，
+	 * 与绑定到任何普通的HTML特性相类似，就是用 v-bind。每当父组件的数据变化时，该变化也会传导给子组件*/
+
 	var dynaProp = {
-	    props: ['parentmsg'],
-	    template: "<div><input v-model='parentmsg'><br> <child :my-message='parentmsg'>{{parentmsg}}</child></div>"
+	  props: ['parentmsg'],
+	  template: "<div><input v-model='parentmsg'><br><child :my-message='parentmsg'>{{parentmsg}}</child></div>"
 	};
 
 	exports.default = {
-	    components: {
-	        'child': child,
-	        'camelcased': camelcased,
-	        'dyanprops': dynaProp
-	    }
+	  components: {
+	    'child': child,
+	    'camelcased': camelcased,
+	    'dyanprops': dynaProp
+	  }
 	};
 
 	// </script>
@@ -10953,9 +10963,102 @@
 
 /***/ },
 /* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(15)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Coustomecomponent.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(16)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-561b7769/Coustomecomponent.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n</div>\n";
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//
+	//     <div id="counter-event-example">
+	//         <custome-component></custome-component>
+	//     </div>
+	// </template>
+	//
+	// <script>
+
+	var botton_counter = {
+	    template: "<button v-on:click='increment'>{{counter}}</button>",
+	    data: function data() {
+	        return { counter: 0 };
+	    },
+	    methods: {
+	        increment: function increment() {
+	            this.counter += 1;
+	            this.$emit("increment"); //
+	        }
+	    }
+	};
+	var parent_component = {
+	    template: '<p>{{total}}</p><button-counter v-on:increment="incrementTotal"></button-counter><button-counter v-on:increment="incrementTotal"></button-counter>',
+	    data: function data() {
+	        return { total: 0 };
+	    },
+	    methods: {
+	        incrementTotal: function incrementTotal() {
+	            this.total += 1;
+	        }
+	    }
+	};
+
+	exports.default = {
+	    components: {
+
+	        "custome-component": parent_component,
+	        "button-counter": botton_counter
+
+	    }
+
+	};
+
+	// </script>
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n<div id=\"counter-event-example\">\n    <custome-component></custome-component>\n</div>\n";
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n</div>\n";
 
 /***/ }
 /******/ ]);
