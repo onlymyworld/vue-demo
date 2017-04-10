@@ -1,6 +1,6 @@
 <template>
 
-    <div id="counter-event-example">
+    <div id="customercomponent">
         <custome-component></custome-component>
     </div>
 </template>

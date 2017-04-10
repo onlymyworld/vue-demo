@@ -1,0 +1,31 @@
+﻿Vue学习
+
+
+1. 过渡效果：多组件过渡，我们不需要使用key特性，只需要动态组件；
+<!--多组件过渡-->
+<input type="radio" v-model="view" name="view" value="v-a" checked>A
+<input type="radio" v-model="view" name="view" value="v-b">B
+<transition name="component-fade" mode="out-in">
+    <component v-bind:is="view"></component>
+</transition>
+/**
+ * 定义多个组件*/
+new Vue({
+	el:”#example”,
+	components:{
+    'v-a':{
+        template:"<div>this is a component</div>"
+    },
+    'v-b':{
+        template:"<div>this is b component</div>"
+    }
+   }
+})
+
+2. 列表过渡
+同时渲染整个列表，比如说使用v-for，在这种场景下，使用transition-group组件，该组件有两个特性：
+1) 不同于transition,他会以一个真实的元素呈现，默认是<span>,也可以通过tag特性更换为其他元素
+2) 内部元素总是需要提供唯一的key属性值
+
+3. 可复用的过渡
+4. 动态过渡

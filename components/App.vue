@@ -29,6 +29,7 @@
     <datamustfun></datamustfun>
     <parentpropstochild></parentpropstochild>
     <customercomponent></customercomponent>
+    <translate></translate>
   </div>
 </template>
 
@@ -37,13 +38,15 @@
   import Datamustfun from './Datamustfun.vue'
   import Parentpropstochild from './Parentpropstochild.vue'
   import Customercomponent from './Coustomecomponent.vue'
+  import Translate from './Translate.vue'
 
   export default{
     components:{
       Components,
       Datamustfun,
       Parentpropstochild,
-      Customercomponent
+      Customercomponent,
+      Translate
     }
   }
 </script>

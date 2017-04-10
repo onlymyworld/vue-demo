@@ -1,6 +1,6 @@
 <template>
   <div id="parentpropstochild">
-     <child message="this is parent props to child example!"></child>
+      <child message="this is parent props to child example!"></child>
       <camelcased my-message="this is camelCased example!"></camelcased>
       <dyanprops></dyanprops>
   </div>
@@ -38,6 +38,9 @@
        props:['parentmsg'],
        template:"<div><input v-model='parentmsg'><br><child :my-message='parentmsg'>{{parentmsg}}</child></div>"
    }
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="example">
+  <div id="components">
      <my-component></my-component>
      <hello></hello>
   </div>

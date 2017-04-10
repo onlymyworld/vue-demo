@@ -10590,7 +10590,7 @@
 	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(17)
+	__vue_template__ = __webpack_require__(20)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10640,8 +10640,22 @@
 
 	var _Coustomecomponent2 = _interopRequireDefault(_Coustomecomponent);
 
+	var _Translate = __webpack_require__(17);
+
+	var _Translate2 = _interopRequireDefault(_Translate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	exports.default = {
+	  components: {
+	    Components: _Components2.default,
+	    Datamustfun: _Datamustfun2.default,
+	    Parentpropstochild: _Parentpropstochild2.default,
+	    Customercomponent: _Coustomecomponent2.default,
+	    Translate: _Translate2.default
+	  }
+	};
+	// </script>
 	// <!--
 	//
 	// <template>
@@ -10673,19 +10687,11 @@
 	//     <datamustfun></datamustfun>
 	//     <parentpropstochild></parentpropstochild>
 	//     <customercomponent></customercomponent>
+	//     <translate></translate>
 	//   </div>
 	// </template>
 	//
 	// <script>
-	exports.default = {
-	  components: {
-	    Components: _Components2.default,
-	    Datamustfun: _Datamustfun2.default,
-	    Parentpropstochild: _Parentpropstochild2.default,
-	    Customercomponent: _Coustomecomponent2.default
-	  }
-	};
-	// </script>
 
 /***/ },
 /* 5 */
@@ -10730,7 +10736,7 @@
 	    value: true
 	});
 	// <template>
-	//   <div id="example">
+	//   <div id="components">
 	//      <my-component></my-component>
 	//      <hello></hello>
 	//   </div>
@@ -10760,7 +10766,7 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"example\">\n   <my-component></my-component>\n   <hello></hello>\n</div>\n";
+	module.exports = "\n<div id=\"components\">\n   <my-component></my-component>\n   <hello></hello>\n</div>\n";
 
 /***/ },
 /* 8 */
@@ -10907,7 +10913,7 @@
 	});
 	// <template>
 	//   <div id="parentpropstochild">
-	//      <child message="this is parent props to child example!"></child>
+	//       <child message="this is parent props to child example!"></child>
 	//       <camelcased my-message="this is camelCased example!"></camelcased>
 	//       <dyanprops></dyanprops>
 	//   </div>
@@ -10959,7 +10965,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"parentpropstochild\">\n   <child message=\"this is parent props to child example!\"></child>\n    <camelcased my-message=\"this is camelCased example!\"></camelcased>\n    <dyanprops></dyanprops>\n</div>\n";
+	module.exports = "\n<div id=\"parentpropstochild\">\n    <child message=\"this is parent props to child example!\"></child>\n    <camelcased my-message=\"this is camelCased example!\"></camelcased>\n    <dyanprops></dyanprops>\n</div>\n";
 
 /***/ },
 /* 14 */
@@ -11005,7 +11011,7 @@
 	});
 	// <template>
 	//
-	//     <div id="counter-event-example">
+	//     <div id="customercomponent">
 	//         <custome-component></custome-component>
 	//     </div>
 	// </template>
@@ -11052,13 +11058,157 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n<div id=\"counter-event-example\">\n    <custome-component></custome-component>\n</div>\n";
+	module.exports = "\n\n<div id=\"customercomponent\">\n    <custome-component></custome-component>\n</div>\n";
 
 /***/ },
 /* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(18)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Translate.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(19)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-f7a9bd12/Translate.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n</div>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//     <div id="transition">
+	//         <button @click="show = !show">
+	//             toggle
+	//         </button>
+	//         <transition name="fade">
+	//             <p v-show="show">
+	//                 切换内容
+	//             </p>
+	//         </transition>
+	//
+	//
+	//         <!--多组件过渡-->
+	//         <input type="radio" v-model="view" name="view" value="v-a" checked>A
+	//         <input type="radio" v-model="view" name="view" value="v-b">B
+	//         <transition name="component-fade" mode="out-in">
+	//             <component v-bind:is="view"></component>
+	//         </transition>
+	//
+	//
+	//
+	//         <!--列表的过渡-->
+	//         <button @click="Add">Add</button>
+	//         <button @click="Remove">Remove</button>
+	//         <button @click="Shuffle">Shuffle</button>
+	//         <transition-group name="list" tag="p">
+	//             <span v-for="item in items" :key="item" class="list-item">
+	//                 {{item}}
+	//             </span>
+	//         </transition-group>
+	//     </div>
+	//
+	// </template>
+	//
+	// <script>
+
+	/**
+	 *1; vue 提供了transition的封装组件，在下列情况下，可以给任何元素和组件添加
+	 * entering 和 leaving 的过渡效果
+	 * 1,条件渲染（使用v-if）
+	 * 2,条件展示（使用v-show）
+	 * 3,动态组件
+	 * 4,组件根节点
+	* */
+
+	/**
+	 *2;多组件过渡，我们不需要type特性，只需要动态组件
+	 *  */
+
+	/**
+	 * 3;列表过渡 列表过渡使用transition-group
+	 * 该组件有两个特性：
+	 * 1)	不同于transition,他会以一个真实的元素呈现，默认是<span>,也可以通过tag特性更换为其他元素
+	 * 2)	内部元素总是需要提供唯一的key属性值
+	 * */
+
+	exports.default = {
+	    data: function data() {
+	        return { show: true, view: 'v-a', nextNum: 10, items: [1, 2, 3, 4, 5, 6, 7, 8, 9] };
+	    },
+
+	    /**
+	     * 定义多个组件；*/
+	    components: {
+	        'v-a': {
+	            template: "<div>this is a component</div>"
+	        },
+	        'v-b': {
+	            template: "<div>this is b component</div>"
+	        }
+	    },
+	    methods: {
+	        randonIndex: function randonIndex() {
+	            return Math.floor(Math.random() * this.items.length);
+	        },
+	        Add: function Add() {
+	            this.items.splice(this.randonIndex(), 0, this.nextNum++);
+	        },
+	        Remove: function Remove() {
+	            this.items.splice(this.randonIndex(), 1);
+	        },
+	        Shuffle: function Shuffle() {
+	            this.items = _.shuffle(this.items);
+	        }
+	    }
+	};
+
+	/* new Vue({
+	     el:"#example",
+	     data:{
+	         show:true
+	     }
+	 })*/
+
+	// </script>
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"transition\">\n    <button @click=\"show = !show\">\n        toggle\n    </button>\n    <transition name=\"fade\">\n        <p v-show=\"show\">\n            切换内容\n        </p>\n    </transition>\n\n\n    <!--多组件过渡-->\n    <input type=\"radio\" v-model=\"view\" name=\"view\" value=\"v-a\" checked>A\n    <input type=\"radio\" v-model=\"view\" name=\"view\" value=\"v-b\">B\n    <transition name=\"component-fade\" mode=\"out-in\">\n        <component v-bind:is=\"view\"></component>\n    </transition>\n\n\n\n    <!--列表的过渡-->\n    <button @click=\"Add\">Add</button>\n    <button @click=\"Remove\">Remove</button>\n    <button @click=\"Shuffle\">Shuffle</button>\n    <transition-group name=\"list\" tag=\"p\">\n        <span v-for=\"item in items\" :key=\"item\" class=\"list-item\">\n            {{item}}\n        </span>\n    </transition-group>\n</div>\n\n";
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n  <translate></translate>\n</div>\n";
 
 /***/ }
 /******/ ]);
