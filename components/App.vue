@@ -30,6 +30,8 @@
     <parentpropstochild></parentpropstochild>
     <customercomponent></customercomponent>
     <translate></translate>
+    <transitionstate></transitionstate>
+    <componentstransition></componentstransition>
   </div>
 </template>
 
@@ -39,6 +41,8 @@
   import Parentpropstochild from './Parentpropstochild.vue'
   import Customercomponent from './Coustomecomponent.vue'
   import Translate from './Translate.vue'
+  import Transitionstate from './Transitionstate.vue'
+  import Componentstransition from './Componentstransition.vue'
 
   export default{
     components:{
@@ -46,7 +50,9 @@
       Datamustfun,
       Parentpropstochild,
       Customercomponent,
-      Translate
+      Translate,
+      Transitionstate,
+      Componentstransition
     }
   }
 </script>

@@ -10590,7 +10590,7 @@
 	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(20)
+	__vue_template__ = __webpack_require__(41)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10644,6 +10644,14 @@
 
 	var _Translate2 = _interopRequireDefault(_Translate);
 
+	var _Transitionstate = __webpack_require__(20);
+
+	var _Transitionstate2 = _interopRequireDefault(_Transitionstate);
+
+	var _Componentstransition = __webpack_require__(38);
+
+	var _Componentstransition2 = _interopRequireDefault(_Componentstransition);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
@@ -10652,7 +10660,9 @@
 	    Datamustfun: _Datamustfun2.default,
 	    Parentpropstochild: _Parentpropstochild2.default,
 	    Customercomponent: _Coustomecomponent2.default,
-	    Translate: _Translate2.default
+	    Translate: _Translate2.default,
+	    Transitionstate: _Transitionstate2.default,
+	    Componentstransition: _Componentstransition2.default
 	  }
 	};
 	// </script>
@@ -10688,6 +10698,8 @@
 	//     <parentpropstochild></parentpropstochild>
 	//     <customercomponent></customercomponent>
 	//     <translate></translate>
+	//     <transitionstate></transitionstate>
+	//     <componentstransition></componentstransition>
 	//   </div>
 	// </template>
 	//
@@ -11206,9 +11218,498 @@
 
 /***/ },
 /* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(21)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Transitionstate.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(37)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-2cadecc5/Transitionstate.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _assign = __webpack_require__(22);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// <template>
+	//     <div id="tansitionstate">
+	//         <input type="number" v-model.number="number" step="20" />
+	//         <p>{{animatedNumber}}</p>
+	//
+	//
+	//
+	//         <input v-model="colorQuery" @keyup.enter="updateColor" placeholder="please input a color">
+	//         <button @click="updateColor">update</button>
+	//          <p>preview:</p>
+	//         <span v-bind:style="{backgroundColor:tweenedCSSColor}" class="example-7-color-preview"></span>
+	//         <p>{{tweenedCSSColor}}</p>
+	//     </div>
+	//
+	//
+	//
+	//
+	// </template>
+	//
+	// <script>
+
+	/**
+	 * 状态动画与watcher
+	 * 通过watcher我们能监听到任何数值属性的数值变化，使用tweenjs的例子
+	 * 当数值更新时，就会触发动画，但是对于不能直接像数值一样存储的值，比如css中的值
+	 * 利用color.js实现；
+	 * */
+	var Color = net.brehaut.Color;
+	exports.default = {
+	    data: function data() {
+	        return {
+	            number: 0,
+	            animatedNumber: 0,
+	            colorQuery: '',
+	            color: {
+	                red: 0,
+	                green: 0,
+	                blue: 0,
+	                alpha: 1
+	            },
+	            tweenedColor: {}
+	        };
+	    },
+
+	    created: function created() {
+	        this.tweenedColor = (0, _assign2.default)({}, this.color);
+	    },
+	    watch: {
+	        number: function number(newValue, oldValue) {
+	            var vm = this;
+	            function animate(time) {
+	                requestAnimationFrame(animate);
+	                TWEEN.update(time);
+	            }
+	            new TWEEN.Tween({ tweeningNumber: oldValue }).easing(TWEEN.Easing.Quadratic.Out).to({ tweeningNumber: newValue }, 500).onUpdate(function () {
+	                vm.animatedNumber = this.tweeningNumber.toFixed(0);
+	            }).start();
+	            animate();
+	        },
+	        color: function color() {
+	            function animate(time) {
+	                requestAnimationFrame(animate);
+	                TWEEN.update(time);
+	            }
+	            new TWEEN.Tween(this.tweenedColor).to(this.color, 750).start();
+	            animate();
+	        }
+	    },
+	    computed: {
+	        tweenedCSSColor: function tweenedCSSColor() {
+	            return new Color({
+	                red: this.tweenedColor.red,
+	                green: this.tweenedColor.green,
+	                blue: this.tweenedColor.blue,
+	                alpha: this.tweenedColor.alpha
+	            }).toCSS();
+	        }
+	    },
+	    methods: {
+	        updateColor: function updateColor() {
+	            this.color = new Color(this.colorQuery).toRGB();
+	            this.colorQuery = '';
+	        }
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(23), __esModule: true };
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(24);
+	module.exports = __webpack_require__(27).Object.assign;
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(25);
+
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(30)});
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(26)
+	  , core      = __webpack_require__(27)
+	  , ctx       = __webpack_require__(28)
+	  , PROTOTYPE = 'prototype';
+
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && key in target;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(param){
+	        return this instanceof C ? new C(param) : C(param);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    if(IS_PROTO)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+	  }
+	};
+	// type bitmap
+	$export.F = 1;  // forced
+	$export.G = 2;  // global
+	$export.S = 4;  // static
+	$export.P = 8;  // proto
+	$export.B = 16; // bind
+	$export.W = 32; // wrap
+	module.exports = $export;
+
+/***/ },
+/* 26 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n  <translate></translate>\n</div>\n";
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '1.2.6'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(29);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var $        = __webpack_require__(31)
+	  , toObject = __webpack_require__(32)
+	  , IObject  = __webpack_require__(34);
+
+	// should work with symbols and should have deterministic property order (V8 bug)
+	module.exports = __webpack_require__(36)(function(){
+	  var a = Object.assign
+	    , A = {}
+	    , B = {}
+	    , S = Symbol()
+	    , K = 'abcdefghijklmnopqrst';
+	  A[S] = 7;
+	  K.split('').forEach(function(k){ B[k] = k; });
+	  return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
+	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+	  var T     = toObject(target)
+	    , $$    = arguments
+	    , $$len = $$.length
+	    , index = 1
+	    , getKeys    = $.getKeys
+	    , getSymbols = $.getSymbols
+	    , isEnum     = $.isEnum;
+	  while($$len > index){
+	    var S      = IObject($$[index++])
+	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+	  }
+	  return T;
+	} : Object.assign;
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	var $Object = Object;
+	module.exports = {
+	  create:     $Object.create,
+	  getProto:   $Object.getPrototypeOf,
+	  isEnum:     {}.propertyIsEnumerable,
+	  getDesc:    $Object.getOwnPropertyDescriptor,
+	  setDesc:    $Object.defineProperty,
+	  setDescs:   $Object.defineProperties,
+	  getKeys:    $Object.keys,
+	  getNames:   $Object.getOwnPropertyNames,
+	  getSymbols: $Object.getOwnPropertySymbols,
+	  each:       [].forEach
+	};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(33);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(35);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"tansitionstate\">\n    <input type=\"number\" v-model.number=\"number\" step=\"20\" />\n    <p>{{animatedNumber}}</p>\n\n\n\n    <input v-model=\"colorQuery\" @keyup.enter=\"updateColor\" placeholder=\"please input a color\">\n    <button @click=\"updateColor\">update</button>\n     <p>preview:</p>\n    <span v-bind:style=\"{backgroundColor:tweenedCSSColor}\" class=\"example-7-color-preview\"></span>\n    <p>{{tweenedCSSColor}}</p>\n</div>\n\n\n\n\n";
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(39)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Componentstransition.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(40)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-05b928d2/Componentstransition.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//     <div id="componentstransition">
+	//         <input type="number" v-model="firstNumber" step="10">+
+	//         <input type="number" v-model="secondNumber" step="10">=
+	//         {{result}}
+	//         <animated-integer v-bind:value="firstNumber"></animated-integer>
+	//         <animated-integer v-bind:value="secondNumber"></animated-integer>
+	//         <animated-integer v-bind:value="result"></animated-integer>
+	//
+	//     </div>
+	// </template>
+	//
+	// <script>
+
+	/**
+	 * 通过组件组织过渡
+	 *
+	 * */
+	var animatedinteger = {
+	    template: "<span>{{tweeningValue}}</span>",
+	    props: {
+	        type: 'number',
+	        require: true
+	    },
+	    data: function data() {
+	        return { tweeningValue: 0 };
+	    },
+	    watch: {
+	        value: function value(newValue, oldValue) {
+	            this.tween(oldValue, newValue);
+	        }
+	    },
+	    mounted: function mounted() {
+	        this.tween(0, this.Value);
+	    },
+	    methods: {
+	        tween: function tween(startValue, endValue) {
+	            var vm = this;
+	            function animate(time) {
+	                requestAnimationFrame(animate);
+	                TWEEN.update(time);
+	            }
+	            new TWEEN.Tween({ tweeningValue: startValue }).to({ tweeningValue: endValue }, 500).onUpdate(function () {
+	                vm.tweeningValue = this.tweeningValue.toFixed(0);
+	            }).start();
+	            animate();
+	        }
+	    }
+	};
+
+	exports.default = {
+	    data: {
+	        firstNumber: 20,
+	        secondNumber: 40
+	    },
+	    components: {
+	        "animated-integer": animatedinteger
+	    },
+	    computed: {
+	        result: function result() {
+	            return this.firstNumber + this.secondNumber;
+	        }
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"componentstransition\">\n    <input type=\"number\" v-model=\"firstNumber\" step=\"10\">+\n    <input type=\"number\" v-model=\"secondNumber\" step=\"10\">=\n    {{result}}\n    <animated-integer v-bind:value=\"firstNumber\"></animated-integer>\n    <animated-integer v-bind:value=\"secondNumber\"></animated-integer>\n    <animated-integer v-bind:value=\"result\"></animated-integer>\n\n</div>\n";
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n  <translate></translate>\n  <transitionstate></transitionstate>\n  <componentstransition></componentstransition>\n</div>\n";
 
 /***/ }
 /******/ ]);
