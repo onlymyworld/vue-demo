@@ -10590,7 +10590,7 @@
 	__vue_script__ = __webpack_require__(4)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
 	  console.warn("[vue-loader] components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(41)
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10652,20 +10652,12 @@
 
 	var _Componentstransition2 = _interopRequireDefault(_Componentstransition);
 
+	var _Componentrender = __webpack_require__(41);
+
+	var _Componentrender2 = _interopRequireDefault(_Componentrender);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
-	  components: {
-	    Components: _Components2.default,
-	    Datamustfun: _Datamustfun2.default,
-	    Parentpropstochild: _Parentpropstochild2.default,
-	    Customercomponent: _Coustomecomponent2.default,
-	    Translate: _Translate2.default,
-	    Transitionstate: _Transitionstate2.default,
-	    Componentstransition: _Componentstransition2.default
-	  }
-	};
-	// </script>
 	// <!--
 	//
 	// <template>
@@ -10700,10 +10692,24 @@
 	//     <translate></translate>
 	//     <transitionstate></transitionstate>
 	//     <componentstransition></componentstransition>
+	//     <componentrender></componentrender>
 	//   </div>
 	// </template>
 	//
 	// <script>
+	exports.default = {
+	  components: {
+	    Components: _Components2.default,
+	    Datamustfun: _Datamustfun2.default,
+	    Parentpropstochild: _Parentpropstochild2.default,
+	    Customercomponent: _Coustomecomponent2.default,
+	    Translate: _Translate2.default,
+	    Transitionstate: _Transitionstate2.default,
+	    Componentstransition: _Componentstransition2.default,
+	    Componentrender: _Componentrender2.default
+	  }
+	};
+	// </script>
 
 /***/ },
 /* 5 */
@@ -11707,9 +11713,105 @@
 
 /***/ },
 /* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(42)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] components\\Componentrender.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(43)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-b6453c88/Componentrender.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 42 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n  <translate></translate>\n  <transitionstate></transitionstate>\n  <componentstransition></componentstransition>\n</div>\n";
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	//     <div id="componentrender">
+	//         <anchored-heading :level="1">Hello world!</anchored-heading>
+	//     </div>
+	// </template>
+	// <!--<script type="text/x-template" id="anchored-heading-template">
+	//     <div>
+	//         <h1 v-if="level===1">
+	//             <slot></slot>
+	//         </h1>
+	//         <h2 v-if="level===2">
+	//             <slot></slot>
+	//         </h2>
+	//         <h3 v-if="level===3">
+	//             <slot></slot>
+	//         </h3>
+	//         <h4 v-if="level===4">
+	//             <slot></slot>
+	//         </h4>
+	//         <h5 v-if="level===5">
+	//             <slot></slot>
+	//         </h5>
+	//     </div>
+	// </script>-->
+	// <script>
+
+	var level = {
+	    render: function render(createElement) {
+	        return createElement('h' + this.level, // tag name 标签名称
+	        this.$slots.default // 子组件中的阵列
+	        );
+	    },
+	    props: {
+	        level: {
+	            type: Number,
+	            require: true
+	        }
+	    }
+	};
+
+	exports.default = {
+	    components: {
+	        "anchored-heading": level
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"componentrender\">\n    <anchored-heading :level=\"1\">Hello world!</anchored-heading>\n</div>\n";
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div id=\"app\">\n  <components></components>\n  <datamustfun></datamustfun>\n  <parentpropstochild></parentpropstochild>\n  <customercomponent></customercomponent>\n  <translate></translate>\n  <transitionstate></transitionstate>\n  <componentstransition></componentstransition>\n  <componentrender></componentrender>\n</div>\n";
 
 /***/ }
 /******/ ]);

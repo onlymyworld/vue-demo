@@ -32,6 +32,7 @@
     <translate></translate>
     <transitionstate></transitionstate>
     <componentstransition></componentstransition>
+    <componentrender></componentrender>
   </div>
 </template>
 
@@ -43,6 +44,7 @@
   import Translate from './Translate.vue'
   import Transitionstate from './Transitionstate.vue'
   import Componentstransition from './Componentstransition.vue'
+  import Componentrender from './Componentrender.vue'
 
   export default{
     components:{
@@ -52,7 +54,8 @@
       Customercomponent,
       Translate,
       Transitionstate,
-      Componentstransition
+      Componentstransition,
+      Componentrender
     }
   }
 </script>

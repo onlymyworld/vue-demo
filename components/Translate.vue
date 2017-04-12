@@ -85,16 +85,4 @@
     }
 
 
-
-
-
-
-
-    /* new Vue({
-         el:"#example",
-         data:{
-             show:true
-         }
-     })*/
-
 </script>
